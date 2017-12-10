@@ -1,0 +1,41 @@
+{% load static %}
+
+<head>
+  {% block head_script %}
+  {% endblock %}
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,700,700i" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'locator/style.css' %}" />
+</head>
+<body>
+  {% block login %}
+
+    <div id="login">
+      {% if request.user.is_anonymous %}
+        <a href="{% url 'login' %}">LOG IN</a> /
+        <a href="{% url 'signup' %}">SIGN UP</a>
+      {% else %}
+        Hello, {{ request.user }}.
+        <a href="{% url 'logout' %}">LOG OUT</a>
+      {% endif %}
+    </div>
+  {% endblock %}
+
+  <div class="page-header">
+      <h1>
+          {% block title %}
+          {% endblock %}
+      </h1>
+  </div>
+
+  <div class="content container">
+      <div class="row">
+          <div class="col-md-8">
+          {% block content %}
+          {% endblock %}
+          </div>
+      </div>
+  </div>
+  {% block body_script %}
+  {% endblock %}
+</body>
+
